@@ -6,7 +6,7 @@ using Requires
 const VecOfIntegers{N, T <: SIMD.IntegerTypes} = Vec{N, T}
 
 abstract type AbstractIndex end
-const Index = Union{Int, VecOfIntegers, AbstractIndex}
+const Index = Union{Int, VecOfIntegers, VecRange, AbstractIndex}
 
 
 function __init__()
