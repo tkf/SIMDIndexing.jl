@@ -19,10 +19,6 @@ jobs:
     # sure that the test setting is compatible with Pkg.test.
     - &test
       julia: 1.0
-      install:
-        - ci/instantiate-subproject . test
-      script:
-        - ci/run-subproject test/runtests.jl --code-coverage=user
     - <<: *test
       julia: 1.1
 
