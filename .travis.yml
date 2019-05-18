@@ -2,21 +2,29 @@
 language: julia
 os:
   - linux
-julia:
-  - 1.0
-  - nightly
 matrix:
-  allow_failures:
-    - julia: nightly
+  # allow_failures:
+  #   - julia: nightly
   fast_finish: true
 notifications:
   email: false
 
-install:
-  - ci/instantiate-subproject . test
+jobs:
+  include:
+    # - julia: 1.2
+    - julia: nightly
 
-script:
-  - ci/run-subproject test/runtests.jl --code-coverage=user
+    # Use jobs.include to run tests for Julia 1.0 and 1.1.  This way,
+    # the tests for more recent Julia use the default script and we
+    # can make sure that the test setting is compatible with Pkg.test.
+    - &test
+      julia: 1.0
+      install:
+        - ci/instantiate-subproject . test
+      script:
+        - ci/run-subproject test/runtests.jl --code-coverage=user
+    - <<: *test
+      julia: 1.1
 
 after_success:
   - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
