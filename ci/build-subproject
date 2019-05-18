@@ -3,20 +3,24 @@
 #=
 JULIA="${JULIA:-julia}"
 JULIA_CMD="${JULIA_CMD:-${JULIA} --color=yes --startup-file=no}"
-project="$1"
-shift
-exec ${JULIA_CMD} --project="$project" "$@" "${BASH_SOURCE[0]}"
+exec ${JULIA_CMD} "${BASH_SOURCE[0]}" "$@"
 =#
 
 # Usage:
-#   ci/install-to DIRECTORY
+#   ci/build-subproject MAIN SUB
 #
-# Install a project at current working directory a (sub)project at
-# DIRECTORY.  Packages installed in DIRECTORY are then built and
-# precompiled.
+# Install a project at directory MAIN into a (sub)project at directory
+# SUB.  Packages installed in SUB are then built and precompiled.
+
+main, sub = ARGS
 
 using Pkg
-Pkg.develop(PackageSpec(path=pwd()))
+
+Pkg.activate(sub)
+
+@info "Installing $main to $sub..."
+@time Pkg.develop(PackageSpec(path=main))
+@info "Installing... DONE"
 
 @info "Building..."
 @time if VERSION >= v"1.1.0-rc1"
