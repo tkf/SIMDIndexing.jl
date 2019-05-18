@@ -1,0 +1,6 @@
+[deps]
+FillArrays = "1a297f60-69ca-5386-bcde-b61e274b549b"
+MappedArrays = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
+SIMD = "fdea26ae-647d-5447-a871-4b548cad5224"
+SIMDIndexing = "dc12af0d-3b10-50fe-b0dd-a5d243725f40"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

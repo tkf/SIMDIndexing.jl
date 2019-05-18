@@ -1,0 +1,17 @@
+#!/bin/bash
+# -*- mode: julia -*-
+#=
+JULIA="${JULIA:-julia}"
+JULIA_CMD="${JULIA_CMD:-${JULIA} --color=yes --startup-file=no}"
+project="$1"
+shift
+exec ${JULIA_CMD} --project="$project" "$@" "${BASH_SOURCE[0]}"
+=#
+
+using Pkg
+Pkg.develop(PackageSpec(path=pwd()))
+if VERSION >= v"1.1.0-rc1"
+    Pkg.build(verbose=true)
+else
+    Pkg.build()
+end
