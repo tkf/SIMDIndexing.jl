@@ -7,6 +7,9 @@ JULIA_CMD="${JULIA_CMD:-${JULIA} --color=yes --startup-file=no --check-bounds=ye
 JULIA_PROJECT="$(dirname "${BASH_SOURCE[0]}")"
 export JULIA_PROJECT
 
+JULIA_LOAD_PATH=@
+export JULIA_LOAD_PATH
+
 exec ${JULIA_CMD} "$@" "${BASH_SOURCE[0]}"
 =#
 
