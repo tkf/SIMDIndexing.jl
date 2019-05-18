@@ -9,4 +9,6 @@ using Test
     include(file)
 end
 
+@test false
+
 end  # module
