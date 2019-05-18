@@ -3,8 +3,8 @@ language: julia
 os:
   - linux
 matrix:
-  # allow_failures:
-  #   - julia: nightly
+  allow_failures:
+    - julia: nightly
   fast_finish: true
 notifications:
   email: false
