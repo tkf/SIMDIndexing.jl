@@ -8,6 +8,13 @@ shift
 exec ${JULIA_CMD} --project="$project" "$@" "${BASH_SOURCE[0]}"
 =#
 
+# Usage:
+#   ci/install-to DIRECTORY
+#
+# Install a project at current working directory a (sub)project at
+# DIRECTORY.  Packages installed in DIRECTORY are then built and
+# precompiled.
+
 using Pkg
 Pkg.develop(PackageSpec(path=pwd()))
 
