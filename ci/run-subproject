@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Usage:
+#   ci/run-subproject SUBPROJECT/SCRIPT.jl [julia options]
+#
+# Run SUBPROJECT/SCRIPT.jl inside project SUBPROJECT.
+# SUBPROJECT/Project.toml and SUBPROJECT/Manifest.toml must exist.
+
+JULIA="${JULIA:-julia}"
+JULIA_CMD="${JULIA_CMD:-${JULIA} --color=yes --startup-file=no --check-bounds=yes}"
+
+script="$1"
+shift
+
+JULIA_PROJECT="$(dirname "$script")"
+export JULIA_PROJECT
+
+JULIA_LOAD_PATH=@
+export JULIA_LOAD_PATH
+
+exec ${JULIA_CMD} "$@" "$script"

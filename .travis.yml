@@ -16,7 +16,7 @@ install:
   - ci/build-subproject . test
 
 script:
-  - test/runtests.jl --code-coverage=user
+  - ci/run-subproject test/runtests.jl --code-coverage=user
 
 after_success:
   - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
