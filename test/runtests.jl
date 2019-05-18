@@ -2,7 +2,7 @@
 # -*- mode: julia -*-
 #=
 JULIA="${JULIA:-julia}"
-JULIA_CMD="${JULIA_CMD:-${JULIA} --color=yes --startup-file=no}"
+JULIA_CMD="${JULIA_CMD:-${JULIA} --color=yes --startup-file=no --check-bounds=yes}"
 
 JULIA_PROJECT="$(dirname "${BASH_SOURCE[0]}")"
 export JULIA_PROJECT

@@ -16,7 +16,7 @@ install:
   - ci/install-to test
 
 script:
-  - test/runtests.jl
+  - test/runtests.jl --code-coverage=user
 
 after_success:
   - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
