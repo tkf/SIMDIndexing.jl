@@ -10,8 +10,15 @@ exec ${JULIA_CMD} --project="$project" "$@" "${BASH_SOURCE[0]}"
 
 using Pkg
 Pkg.develop(PackageSpec(path=pwd()))
-if VERSION >= v"1.1.0-rc1"
+
+@info "Building..."
+@time if VERSION >= v"1.1.0-rc1"
     Pkg.build(verbose=true)
 else
     Pkg.build()
 end
+@info "Building... DONE"
+
+@info "Precompiling..."
+@time Pkg.API.precompile()
+@info "Precompiling... DONE"
