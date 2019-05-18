@@ -7,10 +7,10 @@ exec ${JULIA_CMD} "${BASH_SOURCE[0]}" "$@"
 =#
 
 # Usage:
-#   ci/build-subproject MAIN SUB
+#   ci/instantiate-subproject MAIN SUB
 #
 # Install a project at directory MAIN into a (sub)project at directory
-# SUB.  Packages installed in SUB are then built and precompiled.
+# SUB.  Project SUB is then instantiated and precompiled.
 
 main, sub = ARGS
 
@@ -22,13 +22,9 @@ Pkg.activate(sub)
 @time Pkg.develop(PackageSpec(path=main))
 @info "Installing... DONE"
 
-@info "Building..."
-@time if VERSION >= v"1.1.0-rc1"
-    Pkg.build(verbose=true)
-else
-    Pkg.build()
-end
-@info "Building... DONE"
+@info "Instantiating..."
+@time Pkg.instantiate()
+@info "Instantiating... DONE"
 
 @info "Precompiling..."
 @time Pkg.API.precompile()

@@ -13,7 +13,7 @@ notifications:
   email: false
 
 install:
-  - ci/build-subproject . test
+  - ci/instantiate-subproject . test
 
 script:
   - ci/run-subproject test/runtests.jl --code-coverage=user
